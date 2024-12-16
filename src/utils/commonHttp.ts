@@ -6,7 +6,7 @@ import axios, {
 import NProgress from '@/config/nprogress'
 
 const instance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API,
+  baseURL: '/map-api',
   timeout: 10000,
   withCredentials: true,
 })
@@ -19,11 +19,6 @@ instance.interceptors.request.use(
     if (config.params === undefined) {
       config.params = {}
     }
-    // 添加或修改params
-    Object.assign(config.params, {
-      timestamp: Date.now(),
-      realIP: '116.25.146.177',
-    })
     // 判断url是否包含http，如果包含则将baseURL设置为空字符串，不走baseURL
     if (config.url && config.url.indexOf('http') === 0) {
       config.baseURL = ''

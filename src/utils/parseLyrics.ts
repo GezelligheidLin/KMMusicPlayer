@@ -66,11 +66,13 @@ export function parseLyrics(lyricString: string): LyricLine[] {
       })
     }
   })
+  console.log(lines, '歌词处理')
 
   return parsedLines
 }
 
 export function parseAndMergeLyrics(lyrics: LyricsResponse): LyricData {
+  console.log(lyrics, '歌词对象')
   const { lyricUser, transUser, lrc, tlyric, romalrc } = lyrics
 
   // 解析原歌词、翻译歌词和罗马音歌词
@@ -94,6 +96,12 @@ export function parseAndMergeLyrics(lyrics: LyricsResponse): LyricData {
     const romaLrc: LyricLine | undefined = romaParsed.find(
       (tran) => tran.time === lyric.time
     )
+
+    console.log({
+      ...lyric,
+      translation: translation?.text,
+      romaLrc: romaLrc?.text,
+    })
 
     // 如果找到翻译，添加到原文对象中
     return {

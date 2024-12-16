@@ -131,8 +131,12 @@ export function useMusicPlayer() {
     const activeLyric = el.querySelector('.activeLyric') as HTMLElement
 
     if (activeLyric) {
-      el.scrollTop =
-        activeLyric.offsetTop - el.clientHeight / 2 - activeLyric.clientHeight
+      el.scrollTo({
+        top: activeLyric.offsetTop - el.clientHeight / 2 - activeLyric.clientHeight,
+        behavior: 'smooth'
+      })
+      // el.scrollTop =
+      //   activeLyric.offsetTop - el.clientHeight / 2 - activeLyric.clientHeight
     }
   }
 
@@ -218,6 +222,7 @@ export function useMusicPlayer() {
   // 改变当前歌曲时间
   const changeCurrentTime = (currentTime: number) => {
     nextTick(() => {
+      console.log(currentTime,'currentTime')
       audio.currentTime = Math.round(currentTime)
     })
   }
